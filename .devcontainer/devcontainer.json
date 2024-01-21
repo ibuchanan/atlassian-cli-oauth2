@@ -1,0 +1,18 @@
+{
+    "name": "Atlassian REST API on the CLI",
+    "image": "mcr.microsoft.com/devcontainers/universal:2-linux",
+    // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+    // "remoteUser": "root"
+    "features": {
+        "ghcr.io/devcontainers-contrib/features/shfmt:1.0.0": {},
+        "ghcr.io/marcozac/devcontainer-features/shellcheck:1": {},
+        "ghcr.io/edouard-lopez/devcontainer-features/bats:0": {},
+        "ghcr.io/meaningful-ooo/devcontainer-features/homebrew:2": {}
+    },
+    "customizations": {
+      "vscode": {
+        "settings": {},
+        "extensions": []
+      }
+    }
+  }
