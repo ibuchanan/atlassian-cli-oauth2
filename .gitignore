@@ -1,0 +1,18 @@
+# For the sake of observability,
+# many HTTP requests are logged to disk as json files.
+*.json
+
+# dotenv environment variable files
+.env
+
+### VisualStudioCode ###
+.history
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+### macOS ###
+.DS_Store

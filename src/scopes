@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# This space separated list of scopes
+# can be a subset or the complete set
+# selected in the developer console.
+# https://developer.atlassian.com/console/myapps
+SCOPES='offline_access read:me'

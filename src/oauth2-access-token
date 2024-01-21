@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+# Starts by loading a refresh token,
+# if it exists.
+# Some cases where manually deleting the file is needed:
+#   - Expired refresh token (usually a matter of months).
+#   - Changed the client id/secret pair or scopes.
+REFRESH_TOKEN=$(jq --raw-output '.refresh_token' access_token_response.json)
+
+if [ -z "$REFRESH_TOKEN" ]; then
+  echo "Performing authorization code flow to obtain initial access token response"
+  oauth2c https://auth.atlassian.com/ \
+    --client-id "${ATLASSIAN_APP_3LO_CLIENT_ID:?Missing client id}" \
+    --client-secret "${ATLASSIAN_APP_3LO_CLIENT_SECRET:?Missing secret}" \
+    --response-types code \
+    --response-mode query \
+    --grant-type authorization_code \
+    --auth-method client_secret_post \
+    --scopes "$SCOPES" \
+    --silent \
+    >access_token_response.json
+else
+  echo "Performing refresh token flow to obtain a fresh access token response"
+  echo "If this step fails, try deleting 'access_token_response.json' to start with a fresh code flow"
+  oauth2c https://auth.atlassian.com/ \
+    --client-id "${ATLASSIAN_APP_3LO_CLIENT_ID:?Missing client id}" \
+    --client-secret "${ATLASSIAN_APP_3LO_CLIENT_SECRET:?Missing secret}" \
+    --grant-type refresh_token \
+    --auth-method client_secret_post \
+    --refresh-token "$REFRESH_TOKEN" \
+    --silent \
+    >access_token_response.json
+fi
+
+ACCESS_TOKEN=$(jq --raw-output '.access_token' access_token_response.json)

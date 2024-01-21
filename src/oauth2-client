@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Find the "Client ID" and "Secret" in the Settings
+# for this app in the developer console.
+# Either set these values in your environment,
+# or uncomment & fill in the following:
+# ATLASSIAN_APP_3LO_CLIENT_ID=
+# ATLASSIAN_APP_3LO_CLIENT_SECRET=

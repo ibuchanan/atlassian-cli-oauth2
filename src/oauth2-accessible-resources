@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+ACCESS_TOKEN=$(jq --raw-output '.access_token' access_token_response.json)
+
+https https://api.atlassian.com/oauth/token/accessible-resources \
+  --auth-type bearer \
+  --auth "$ACCESS_TOKEN" \
+  >accessible_resources.json
+CLOUD_ID=$(jq --raw-output '.[0].id' accessible_resources.json)
+echo "From accessible resources, found cloud id: ${CLOUD_ID:?Missing cloud id from accessible resources}"
